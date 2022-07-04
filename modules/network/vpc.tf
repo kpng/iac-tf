@@ -1,8 +1,8 @@
 resource "aws_vpc" "this" {
-  for_each   = var.vpc
-  cidr_block = each.value.cidr_block
-
+  # for_each   = var.vpcs
+  cidr_block = var.vpc
   tags = {
-    Name = "${terraform.workspace}-${each.key}"
+    Name = "${terraform.workspace}-vpc"
   }
 }
+

@@ -1,0 +1,27 @@
+default:
+    image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+    before_script:
+        - uname -a
+        - apt-get update
+        - apt-get install -y make
+
+stages:
+    - infra_build
+    - infra_apply
+    - infra_delete
+
+infra_build:
+    stage: infra_build
+    script:
+        - make plan
+
+infra_apply:
+    stage: infra_apply
+    script:
+        - make apply
+
+infra_delete:
+    stage: infra_delete
+    script:
+        - make destroy
+    when: manual
